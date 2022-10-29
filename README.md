@@ -242,7 +242,9 @@ Melakukan command-command seperti berikut.
 
 ### WISE
 ```
-echo '
+nano /etc/bind/named.conf.local
+```
+```
 zone "wise.f01.com" {
         type master;
         file "/etc/bind/wise/wise.f01.com";
@@ -251,10 +253,17 @@ zone "wise.f01.com" {
 zone "3.29.10.in-addr.arpa" {
         type master;
         file "/etc/bind/wise/3.29.10.in-addr.arpa";
-};' > /etc/bind/named.conf.local
-
-echo "
-\$TTL    604800
+};
+```
+```
+cp /etc/bind/db.local /etc/bind/wise/2.3.29.10.in-addr.arpa
+nano /etc/bind/wise/3.29.10.in-addr.arpa
+```
+```
+;
+;BIND data file for local loopback interface
+;
+$TTL    604800
 @       IN      SOA     wise.f01.com. root.wise.f01.com. (
                                 2       ; Serial
                         604800          ; Refresh
@@ -264,7 +273,8 @@ echo "
 ;
 3.29.10.in-addr.arpa.   IN      NS      wise.f01.com.
 2                       IN      PTR     wise.f01.com.
-"> /etc/bind/wise/3.29.10.in-addr.arpa
+```
+```
 service bind9 restart
 ```
 ### Garden
