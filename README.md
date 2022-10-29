@@ -300,22 +300,24 @@ host -t PTR 10.29.3.2
 ## Soal 5
 Agar dapat tetap dihubungi jika server WISE bermasalah, buatlah juga Berlint sebagai DNS Slave untuk domain utama (5).
 
+Melakukan command-command seperti berikut.
+
 ### WISE
 ```
 nano /etc/bind/named.conf.local
 ```
 ```
 zone "wise.f01.com" {
-    type master;
-    notify yes;
-    also-notify { 10.29.2.2; };
-    allow-transfer { 10.29.2.2; };
-    file "/etc/bind/wise/wise.f01.com";
+        type master;
+        notify yes;
+        also-notify {10.29.2.2;};
+        allow-transfer {10.29.2.2;};
+        file "/etc/bind/wise/wise.f01.com";
 };
 
-zone "2.3.29.10.in-addr.arpa" {
-    type master;
-    file "/etc/bind/wise/2.3.29.10.in-addr.arpa";
+zone "3.29.10.in-addr.arpa" {
+        type master;
+        file "/etc/bind/wise/3.29.10.in-addr.arpa";
 };
 ```
 ```
@@ -339,6 +341,23 @@ zone "wise.f01.com" {
 ```
 service bind9 restart
 ```
+
+### WISE
+```
+service bind9 stop
+```
+
+### SSS dan Garden
+```
+echo 'nameserver 10.29.3.2
+nameserver 10.29.2.2'> /etc/resolv.conf
+```
+```
+ping wise.f01.com
+```
+
+![image](https://user-images.githubusercontent.com/85897222/198840568-571b18bd-dc44-4b22-aac7-d7d72c5c22b3.png)
+
 
 ## Kendala
 Masih belum terbiasa menggunakan shell scripting.
