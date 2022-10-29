@@ -3,6 +3,8 @@
 ## Soal 1
 WISE akan dijadikan sebagai DNS Master, Berlint akan dijadikan DNS Slave, dan Eden akan digunakan sebagai Web Server. Terdapat 2 Client yaitu SSS, dan Garden. Semua node terhubung pada router Ostania, sehingga dapat mengakses internet (1). 
 
+Konfigurasi dan command pada terminal nya adalah sebagai berikut.
+
 ### Ostania
 ```
 auto eth0
@@ -90,15 +92,19 @@ iface eth0 inet static
 echo nameserver 192.168.122.1 > /etc/resolv.conf
 ```
 <br>
+
 ```
 ping google.com -c 5
 ```
 
-![image](https://user-images.githubusercontent.com/85897222/198836665-cd9299cd-69ce-4887-8a16-887ec4e09b57.png)
+![image](https://user-images.githubusercontent.com/85897222/198836665-cd9299cd-69ce-4887-8a16-887ec4e09b57.png) <br>
+![image](https://user-images.githubusercontent.com/85897222/198836836-0b445f58-53e2-4480-b1d1-3cdbaa1456d1.png) <br>
 
 
 ## Soal 2
 Untuk mempermudah mendapatkan informasi mengenai misi dari Handler, bantulah Loid membuat website utama dengan akses wise.yyy.com dengan alias www.wise.yyy.com pada folder wise (2).
+
+Melakukan command-command seperti berikut.
 
 ### WISE
 ```
@@ -190,9 +196,15 @@ nameserver 10.29.3.2
 ```
 ping wise.f01.com
 ```
+
+![image](https://user-images.githubusercontent.com/85897222/198836988-13106d2e-a0c8-46f6-963f-1e8464ecbe05.png)
+
+
 ## Soal 3
-```
+
 Setelah itu ia juga ingin membuat subdomain eden.wise.yyy.com dengan alias www.eden.wise.yyy.com yang diatur DNS-nya di WISE dan mengarah ke Eden (3).
+
+Melakukan command-command seperti berikut.
 
 ### WISE
 ```
@@ -209,17 +221,22 @@ service bind9 restart
 ```
 ping eden.wise.f01.com -c 5
 ```
-```
+
 ### Garden
 ```
 ping eden.wise.f01.com -c 5
 ```
+
+![image](https://user-images.githubusercontent.com/85897222/198837132-a62a6fc5-5e73-4749-86ab-8f2a4416ac23.png)
+
+
 ## Soal 4
 Buat juga reverse domain untuk domain utama (4)
-```
+
 ### WISE
 ```
 nano /etc/bind/named.conf.local
+```
 ```
 zone "wise.f01.com" {
     type master;
@@ -312,3 +329,6 @@ zone "wise.f01.com" {
 ```
 service bind9 restart
 ```
+
+## Kendala
+Masih belum terbiasa menggunakan shell scripting.
