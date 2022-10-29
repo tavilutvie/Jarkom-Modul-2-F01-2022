@@ -1,4 +1,9 @@
-# Jarkom-Modul-1-F01-2022|
+# Jarkom-Modul-1-F02-2022
+
+Anggota:
+1. Eldenabih Tavirazin Lutvie (5025201213)
+2. Nouval Bachrezi (502520...)
+3. Marsa A R (...)
 
 ## Soal 1
 WISE akan dijadikan sebagai DNS Master, Berlint akan dijadikan DNS Slave, dan Eden akan digunakan sebagai Web Server. Terdapat 2 Client yaitu SSS, dan Garden. Semua node terhubung pada router Ostania, sehingga dapat mengakses internet (1). 
@@ -233,41 +238,33 @@ ping eden.wise.f01.com -c 5
 ## Soal 4
 Buat juga reverse domain untuk domain utama (4)
 
+Melakukan command-command seperti berikut.
+
 ### WISE
 ```
-nano /etc/bind/named.conf.local
-```
-```
+echo '
 zone "wise.f01.com" {
-    type master;
-    file "/etc/bind/wise/wise.f01.com";
+        type master;
+        file "/etc/bind/wise/wise.f01.com";
 };
 
-zone "2.3.29.10.in-addr.arpa" {
-    type master;
-    file "/etc/bind/wise/2.3.29.10.in-addr.arpa";
-};
-```
-```
-cp /etc/bind/db.local /etc/bind/wise/2.3.29.10.in-addr.arpa
-nano /etc/bind/wise/wise.f01.com
-```
-```
-;
-;BIND data file for local loopback interface
-;
-$TTL    604800
+zone "3.29.10.in-addr.arpa" {
+        type master;
+        file "/etc/bind/wise/3.29.10.in-addr.arpa";
+};' > /etc/bind/named.conf.local
+
+echo "
+\$TTL    604800
 @       IN      SOA     wise.f01.com. root.wise.f01.com. (
-                              2         ; Serial
-                         604800         ; Refresh
-                          86400         ; Retry
+                                2       ; Serial
+                        604800          ; Refresh
+                        86400           ; Retry
                         2419200         ; Expire
-                         604800 )       ; Negative Cache TTL
+                        604800 )        ; Negative Cache TTL
 ;
-2.3.29.10.in-addr.arpa.   IN      NS      wise.f01.com.
-2.3                       IN      PTR     wise.f01.com.
-```
-```
+3.29.10.in-addr.arpa.   IN      NS      wise.f01.com.
+2                       IN      PTR     wise.f01.com.
+"> /etc/bind/wise/3.29.10.in-addr.arpa
 service bind9 restart
 ```
 ### Garden
@@ -286,6 +283,9 @@ apt-get install bind9 -y
 ```
 host -t PTR 10.29.3.2
 ```
+
+![image](https://user-images.githubusercontent.com/85897222/198839504-aa733a3a-e8f4-4c39-b95d-c42358cbd11a.png)
+
 
 ## Soal 5
 Agar dapat tetap dihubungi jika server WISE bermasalah, buatlah juga Berlint sebagai DNS Slave untuk domain utama (5).
