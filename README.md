@@ -94,6 +94,8 @@ echo nameserver 192.168.122.1 > /etc/resolv.conf
 ping google.com -c 5
 ```
 
+![image](https://user-images.githubusercontent.com/85897222/198836665-cd9299cd-69ce-4887-8a16-887ec4e09b57.png)
+
 
 ## Soal 2
 Untuk mempermudah mendapatkan informasi mengenai misi dari Handler, bantulah Loid membuat website utama dengan akses wise.yyy.com dengan alias www.wise.yyy.com pada folder wise (2).
